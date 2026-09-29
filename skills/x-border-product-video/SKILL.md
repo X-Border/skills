@@ -19,14 +19,14 @@ metadata:
 2. 需要 `hypit` 技能。没有的话自己安装（先用一句话告诉用户），不用新开会话：
 
    ```bash
-   npx -y skills add hypit-ai/hypit -g -y -a <codex 或 claude-code>
+   npx -y skills add hypit-ai/hypit -g -y -a <codex、claude-code 或 hermes-agent>
    ```
 
-   装好后读取 `~/.agents/skills/hypit/SKILL.md`（Claude Code 是 `~/.claude/skills/hypit/SKILL.md`），按它创作。
+   装好后读取 `~/.agents/skills/hypit/SKILL.md`（Claude Code 是 `~/.claude/skills/hypit/SKILL.md`，Hermes 是 `~/.hermes/skills/hypit/SKILL.md`），按它创作。
 3. 建好视频项目目录，把 Hypit 接到 X-Border：
 
    ```bash
-   npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.0.tgz hypit setup --project <项目目录>
+   npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.1.tgz hypit setup --project <项目目录>
    ```
 
    没有 Hypit 时它会装进项目目录（不要全局安装：npm 全局目录常没有写权限）。之后所有 Hypit 命令都在项目目录里用 `npx hypit …` 执行。重复执行没有副作用。不要自己改 Hypit Profile 里的 X-Border 配置，也不要读取或输出 key。命令最后一行是 `XB_AGENT_KIT status=… next=…`，失败时按 `next` 处理。
