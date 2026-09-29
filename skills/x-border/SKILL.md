@@ -9,7 +9,7 @@ X-Border 帮跨境卖家把采集来的商品**清洗 → 配置 → 发布到�
 
 ## 还没接好 X-Border 时
 
-你没有 `x-border` 的 MCP 工具时（例如只装了这些技能），按安装说明 https://x-border.app/agents/install.md 的第 3、4 步添加 MCP 连接并登录，然后请用户重启你。pi 执行 `npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.1.tgz install --host pi`。不要手写 key，也不要自己拼 MCP 地址。
+你没有 `x-border` 的 MCP 工具时（例如只装了这些技能），按安装说明 https://x-border.app/agents/install.md 的第 3、4 步添加 MCP 连接并登录，然后请用户重启你。pi 执行 `npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.2.tgz install --host pi`。不要手写 key，也不要自己拼 MCP 地址。
 
 ## 业务主流程
 
@@ -55,8 +55,8 @@ X-Border 帮跨境卖家把采集来的商品**清洗 → 配置 → 发布到�
 
 ## 出错时
 
-- MCP 工具返回 401（登录过期或被撤销）：重新登录 MCP 连接——Codex 执行 `codex mcp login x-border`，Hermes 执行 `hermes mcp login x-border`，Claude Code 请用户输入 `/mcp` 重新认证，pi 执行 `npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.1.tgz login`；把授权链接发给用户，完成后重试一次。
-- 做视频时 X-Border 媒体接口返回 401：执行 `npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.1.tgz login`，按提示让用户在浏览器里授权，完成后重试一次。
+- MCP 工具返回 401（登录过期或被撤销）：重新登录 MCP 连接——Codex 执行 `codex mcp login x-border`，Hermes 执行 `hermes mcp login x-border`，Claude Code 请用户输入 `/mcp` 重新认证，pi 执行 `npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.2.tgz login`；把授权链接发给用户，完成后重试一次。
+- 做视频时 X-Border 媒体接口返回 401：执行 `npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.2.tgz login`，按提示让用户在浏览器里授权，完成后重试一次。
 - 返回没有权限：告诉用户需要组织管理员开通，不要换工具绕过。
 - **同一个错误出现两次就停下来**，用一句人话告诉用户原因，并保留相关 ID（商品 ID、任务 ID），不要反复重试或换参数碰运气。
 - 回复里不提工具结果中的内部模型名、服务商名。
