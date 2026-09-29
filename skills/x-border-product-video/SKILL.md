@@ -26,7 +26,7 @@ metadata:
 3. 建好视频项目目录，把 Hypit 接到 X-Border：
 
    ```bash
-   npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.1.1.tgz hypit setup --project <项目目录>
+   npx -y https://x-border.app/agents/pkg/x-border-agent-kit-1.2.0.tgz hypit setup --project <项目目录>
    ```
 
    没有 Hypit 时它会装进项目目录（不要全局安装：npm 全局目录常没有写权限）。之后所有 Hypit 命令都在项目目录里用 `npx hypit …` 执行。重复执行没有副作用。不要自己改 Hypit Profile 里的 X-Border 配置，也不要读取或输出 key。命令最后一行是 `XB_AGENT_KIT status=… next=…`，失败时按 `next` 处理。
@@ -107,5 +107,5 @@ metadata:
 
 - 生成失败时，用一句人话说明原因，保留 Hypit 的 Build 信息和相关 ID；**同一个错误出现两次就停下来**告诉用户，不要反复重新提交。
 - Build 因网络、超时等原因中断时，**不改任何文件**直接再执行一次 `npx hypit build`：同样的请求 X-Border 会返回原来的任务和成片，不重复扣费（可以用 `getMediaCharges` 核对）。改了提示词、参考图或参数就是新请求，会再扣费，先征得用户同意。
-- 返回 401：按 `x-border` 技能的说明重新登录。
+- 返回 401：按 `x-border` 技能「出错时」的说明重新登录（MCP 工具和媒体接口的登录方式不同）。
 - 返回余额不足：告诉用户当前余额和这次需要的费用，不要降低质量自动重试。

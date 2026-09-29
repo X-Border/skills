@@ -9,19 +9,18 @@
 
 ## 安装
 
-推荐让 agent 按官方说明安装，技能和 X-Border 的 MCP 工具会一起装好：
+推荐让 agent 按官方说明安装，技能和 X-Border 的 MCP 连接会一起装好：
 
 > 按 https://x-border.app/agents/install.md 的说明，把 X-Border 装到你自己身上
 
-也可以只装技能：
+也可以手动两步：
 
-```bash
-npx skills add X-Border/skills
-```
+1. 装技能：`npx skills add X-Border/skills`
+2. 在你的 agent 里添加 MCP 地址 `https://api.x-border.app/mcp`，按提示在浏览器里登录 X-Border、选择组织并授权（MCP OAuth）。例如 Codex：`codex mcp add x-border --url https://api.x-border.app/mcp` 然后 `codex mcp login x-border`；Claude Code：`claude mcp add --scope user --transport http x-border https://api.x-border.app/mcp`，再在会话里输入 `/mcp` 登录。
 
-之后 agent 第一次用 X-Border 时，`x-border` 技能会带它完成 MCP 配置和登录（需要用户在浏览器里授权）。目前支持 Codex 和 Claude Code。
+已在 Codex、Claude Code、Hermes 上验证。
 
-> 正式环境即将上线；上线前技能里的安装命令还不能使用。
+> 正式环境即将上线；上线前上面的地址还不能使用。
 
 ## 说明
 
