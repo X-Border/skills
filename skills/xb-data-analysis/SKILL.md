@@ -19,6 +19,8 @@ metadata:
 
 ## 步骤
 
+数据分析的工具也可能直接是 MCP 工具，客户端会给工具名加前缀。先确定能不能直接用（看到搜索结果之前不要执行第 1 步）：有工具搜索时，按平台和要查的东西搜一次（例如搜 `walmart product detail`）；工具列表或搜索结果里有名字以下面第 2 步这类工具名结尾的工具（例如以 `walmart_product_detail_by_product_id` 结尾；有几个都以同一个工具名结尾时选名字最短的那个，例如要亚马逊的 `product_search` 时，以 `temu_product_search` 结尾的是 Temu 的），就不执行第 1 步和命令行：第 2、3 步用工具搜索找工具、看工具的说明和参数，第 4 步直接调用这个工具（扣费一样）。都没有时按下面执行：
+
 1. 执行 `~/.x-border/bin/x-border --version`：执行出错或版本低于 1.5.53 时，按 `x-border` 技能「还没接好 X-Border 时」重新安装。
 2. 列出工具：`~/.x-border/bin/x-border tools --source data-analysis`。工具名的前缀是平台：`walmart_` 沃尔玛、`shopee_` Shopee、`tiktok_` TikTok Shop、`temu_` Temu、`ali1688_` 1688、`reddit_` / `quora_` 社区讨论；没有平台前缀的是亚马逊。
 3. 看要用的工具的说明和参数：`~/.x-border/bin/x-border tools --source data-analysis <工具名>`。必填参数、站点参数（例如亚马逊的 `amz_site`：US、UK、DE、JP…）都按这里的格式写，不要猜。用户没说站点又必填时，问用户。

@@ -9,7 +9,11 @@ X-Border 帮跨境卖家把采集来的商品**清洗 → 配置 → 发布到�
 
 ## 怎么调用 X-Border 工具
 
-在命令行里执行（Windows 上是 `%USERPROFILE%\.x-border\bin\x-border.cmd`）：
+X-Border 工具也可能直接是 MCP 工具，客户端会给工具名加前缀（例如 `getCreditBalance` 可能叫 `mcp__x-border__getCreditBalance`）。第一次调用某个工具前：
+
+1. 有工具搜索时，先按工具名搜一次（例如搜 `getCreditBalance`），看到结果再往下做。
+2. 工具列表或搜索结果里有名字以这个工具名结尾的工具，就直接调用它，参数和结果都和下面的命令一样，不用命令行。有几个都以它结尾时，选名字最短的那个（另一个是别的工具名，只是结尾相同）。
+3. 都没有时，在命令行里执行（Windows 上是 `%USERPROFILE%\.x-border\bin\x-border.cmd`）：
 
 ```bash
 ~/.x-border/bin/x-border call <工具名> '<JSON 参数>'     # 例如 ~/.x-border/bin/x-border call getCreditBalance
@@ -18,16 +22,16 @@ X-Border 帮跨境卖家把采集来的商品**清洗 → 配置 → 发布到�
 ~/.x-border/bin/x-border tools <工具名>                   # 看工具说明和参数格式（不确定参数时先看，不要猜）
 ```
 
-`call` 直接输出工具结果（通常是 JSON）。失败时最后一行是 `XB_CLI status=error next=…`，按 `next` 处理。你已经连着 `x-border` 的 MCP 工具时，直接调用 MCP 工具也一样。
+`call` 直接输出工具结果（通常是 JSON）。失败时最后一行是 `XB_CLI status=error next=…`，按 `next` 处理。
 
 - 在不能联网的沙箱里（例如 Codex 默认的沙箱），第一次调用就申请在沙箱外执行；请用户选「以后不再询问以 `~/.x-border/bin/x-border call` 开头的命令」，之后不会再弹确认。
 - 不要执行 `x-border token`：它只给 Hypit 内部取凭证用，token 不能出现在对话里。
 
 ## 还没接好 X-Border 时
 
-第一次用之前执行 `~/.x-border/bin/x-border --version`。命令不存在、执行出错，或输出的版本低于 1.5.53 时（例如技能来自 PI-Desktop 的 X-Border 插件，或电脑上装的是旧版），按顺序执行（需要 Node.js 22 或更高，执行 `node --version` 检查；没有或太低时先告诉用户再安装）：
+上面第 2 步能直接调用 MCP 工具、而且只调用 X-Border 工具时，跳过这一节。其它情况第一次用之前执行 `~/.x-border/bin/x-border --version`。命令不存在、执行出错，或输出的版本低于 1.5.53 时（例如技能来自 PI-Desktop 的 X-Border 插件，或电脑上装的是旧版），按顺序执行（需要 Node.js 22 或更高，执行 `node --version` 检查；没有或太低时先告诉用户再安装）：
 
-1. 安装命令行：`npx -y https://x-border.app/agents/pkg/x-border-cli-1.5.54.tgz self-install`
+1. 安装命令行：`npx -y https://x-border.app/agents/pkg/x-border-cli-1.5.59.tgz self-install`
 2. 登录（之前登录过的会直接显示已登录，不用用户操作）：`~/.x-border/bin/x-border login`，把输出的授权链接原样发给用户，请用户在浏览器里登录 X-Border 网页、选择组织并点「允许」；然后执行 `~/.x-border/bin/x-border login --wait`，输出还是 `waiting_for_user` 就再执行一次，直到 `status=installed`。
 
 **只用上面装到 `~/.x-border/bin` 的命令行**：不要去电脑上找别的 X-Border 程序或代码（X-Border 桌面端、源码目录、npm 上的同名包）来运行，也不要手写 key 或自己拼地址。上面的命令失败时，把输出告诉用户，不要换别的办法。
