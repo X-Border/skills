@@ -62,7 +62,7 @@ metadata:
 
 ## 执行
 
-0. 先执行 `~/.x-border/bin/x-border --version`：执行出错或版本低于 1.5.53 时，按 `x-border` 技能「还没接好 X-Border 时」重新安装（要用新版的参数）。
+0. 先执行 `~/.x-border/bin/x-border --version`：执行出错或版本低于 1.5.68 时，按 `x-border` 技能「还没接好 X-Border 时」重新安装（要用新版的参数）。
 1. 先 `cd` 到参考视频所在的文件夹（分享链接就用用户当前的项目文件夹）再执行，项目和成片会建在那里的 `xb-videos/` 下；不要在临时目录里执行，成片要放在用户找得到的地方。`~/.x-border/bin/x-border remake start [--mode swap-product|swap-person] [--real-person] --video … --product-image …（或 --product … / --person-image …） [--narration …] [--direction …] [--resolution …] [--budget …]`
    - 复刻：每秒 28 XB Credits，口播字幕另加 2（例如 5 秒带口播 142，32 秒 896）；生成时每段先按 30 秒冻结（840），出片后按实际秒数退回差额；有真人出镜（`--real-person`）每秒 5，按写明的时长扣（例如 15 秒带口播 77）；
    - 视频编辑：720p 每秒 2、1080p 每秒 3（例如 5 秒 720p 是 10）；生成时每段先按 10 秒冻结，出片后按实际秒数退回；
