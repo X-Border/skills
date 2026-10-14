@@ -22,9 +22,10 @@ metadata:
 
 1. 能执行 shell 命令。不能的话，告诉用户这个功能需要能执行命令的 agent。
 2. `x-border` 技能能调用 X-Border（按它的说明接好）。
-3. `hypit` 技能。没有的话按 Hypit 官方方式安装（先用一句话告诉用户），装到你这个 agent 读取技能的目录：
-   - 读 `~/.agents/skills` 的 agent（Codex、PI-Desktop 等），或者不确定时：`npx -y skills add hypit-ai/hypit -g -y -a universal`
+3. `hypit` 技能，**必须是 v0.2.18 版**（和 `x-border hypit setup` 装进项目的 Hypit 0.2.18 一致；Hypit 主干已经是 0.3，写法不同，用主干的技能写出来的源文件在 0.2 上跑不通）。没有的话按 Hypit 官方方式安装（先用一句话告诉用户），装到你这个 agent 读取技能的目录：
+   - 读 `~/.agents/skills` 的 agent（Codex、PI-Desktop 等），或者不确定时：`npx -y skills add hypit-ai/hypit#v0.2.18 -g -y -a universal`
    - 其它 agent 把 `universal` 换成它在 skills.sh 里的名字（例如 Claude Code 是 `claude-code`，装到 `~/.claude/skills`）
+   - 已经装过时先看版本：`~/.agents/.skill-lock.json`（各种 agent 都记在这里）里 `skills.hypit.ref` 不是 `v0.2.18`（没有 `ref` 就是主干版）时，用上面的命令重装一次，不用问用户。
 
    装好后直接读它的 `SKILL.md`（新装的技能可能要到下个会话才会自动加载），不用新开会话。
 
@@ -48,7 +49,7 @@ metadata:
 **创作全程按 `hypit` 技能来**：Brief、要问用户什么、选哪个模型和画质、要不要合成、怎么用用户给的素材、Review，都照它的做法，本技能不改。X-Border 只影响下面几点。
 
 - 项目目录建在你当前的工作目录下（例如 `./xb-videos/<简称>-<日期>/`，日期用 `date +%Y%m%d` 取），不要建到技能文件所在的目录里。命令先 `cd` 进项目目录再用相对路径。
-- **能用的模型**：Hypit 的 Seedance（`@hypit/seedance`）、MiniMax H3，图片 nano-banana-pro / nano-banana-2、seedream-5-lite、gpt-image-2，配音模块（见下一条）。按 `hypit` 技能的方式从中选。别的模型 X-Border 不提供，`npx hypit plan` 会报 `no selected Endpoint`；某个模型在 X-Border 上做不到的组合（比例、时长、分辨率、参考方式），`npx hypit plan` 会报不支持并说明原因。遇到这两种情况，换成能做的组合或模型，并告诉用户改了什么，不要改 Profile 的绑定，也不要换到别的服务。
+- **能用的模型**：Hypit 的 Seedance（`@hypit/seedance`）、MiniMax H3，图片 nano-banana-pro / nano-banana-2、seedream-5-lite、gpt-image-2，配音模块（见下一条）。按 `hypit` 技能的方式从中选；做图默认用 nano-banana-pro（要在图上排文字时用 gpt-image-2），seedream-5-lite 只在用户点名要时用，其它图片模型失败时也不要换成它。别的模型 X-Border 不提供，`npx hypit plan` 会报 `no selected Endpoint`；某个模型在 X-Border 上做不到的组合（比例、时长、分辨率、参考方式），`npx hypit plan` 会报不支持并说明原因。遇到这两种情况，换成能做的组合或模型，并告诉用户改了什么，不要改 Profile 的绑定，也不要换到别的服务。
 - **配音**：照 Hypit 官方写法用 `@hypit/fishaudio-speech`、`@hypit/mimo-speech`、`@hypit/elevenlabs-speech`，声音由 X-Border 的 Qwen3-TTS 生成（不是这些厂商的模型，第一次用时告诉用户一声）。每段最多 1000 字，长台词分段。
 - **写实真人参考**（`person-reference="true"`）只有 `model="mini"`（seedance-2-mini）能做：时长写明 4–15 秒、比例写明（不能用 -1、adaptive），最多一段参考视频；其它 Seedance 版本会被内容审核拒绝。
 - **视频编辑**（X-Border 自带，Hypit 官方没有）：保留一段已有视频，只换里面的商品或人，其他和原声不变，参考可以是写实真人。写法：`<import as="xbedit" from="@x-border/hypit-provider/video-edit@1"/>`，`<xbedit:VideoEdit id="x" prompt={提示词} source={视频} resolution="720p">` 里放 1–4 个 `<xbedit:Reference image={图}/>`，结果是 `x.video`；只编辑视频的前 10 秒，更长的先切段。模型会重新生成声音（真人口播对不上），要原声就在导出后用 ffmpeg 换回原视频的音轨；画面里烧录的字幕会被改乱，用没有字幕的原片，字幕最后再加。整条视频只换商品或人时直接用 `xb-remake-video` 技能（`--mode swap-product` / `swap-person`）。换人必须用用户自己提供的照片，并先确认用户已经得到照片里这个人的同意。
