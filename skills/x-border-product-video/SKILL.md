@@ -78,10 +78,10 @@ metadata:
 1. 调用 `createMediaUpload`（`mediaType: "video"`，`contentType: "video/mp4"`，`fileName` 填本地成片路径），执行返回的 `command` 上传，响应里的 `url` 就是 X-Border 媒体链接。上传链接 15 分钟有效，过期就重新申请。
 2. 调用 `registerGeneratedMedia` 登记：`mediaType: "video"`、`url`、`aspectRatio`，`prompt` 写一句视频内容摘要。以后可以用 `listGeneratedMedia` 找回。
    - 带上 `claimedProductId` 会把视频关联到商品，**这个商品下次清洗时会自动用上这个视频**。只有用户想让商品用这个视频时才带，并先告诉用户这一点；只是存档就不带。
-3. 用户要把视频挂到 Temu 商品上时，调用 `applyMediaToCleanedProduct`（`claimedProductId`、`shopId` 为目标 Temu 店铺、`video.url`）。这是写操作，调用前先确认。注意：
-   - 商品必须已清洗成功（`cleanStatus=success`）；
-   - 只改待发布的内容。商品已经发布上架的，线上视频不会变，要告诉用户；
-   - 之后如果强制重新清洗这个商品，挂上的视频会丢失。
+3. 用户要把视频挂到商品上时，先调 `getProductMediaTargets`（`claimedProductId`）看能挂到哪，再调 `applyMediaToProduct`（`claimedProductId`、`target`、`shopId`、`assetIds` 填第 2 步登记得到的资源 id）。这是写操作，调用前先确认。注意：
+   - 商品还没发布：`target: "beforePublish"`，改的是待发布的内容，之后发布就用它；商品必须已清洗成功；之后如果强制重新清洗这个商品，挂上的视频会丢失。
+   - 商品已经上线：`target: "online"`，`shopId` 填已发布的店铺，直接替换线上商品的主图视频。Temu 视频比例要 1:1、3:4 或 16:9。Shein 提交后要平台审核，审核通过前线上不变，要告诉用户。
+   - Shein 发布前不能加视频，只能等上线后用 `online`。
 
 交付时另外告诉用户视频是否已关联或挂到商品。
 

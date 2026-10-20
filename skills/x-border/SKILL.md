@@ -31,7 +31,7 @@ X-Border 工具也可能直接是 MCP 工具，客户端会给工具名加前缀
 
 上面第 2 步能直接调用 MCP 工具、而且只调用 X-Border 工具时，跳过这一节。其它情况第一次用之前执行 `~/.x-border/bin/x-border --version`。命令不存在、执行出错，或输出的版本低于 1.5.71 时（例如技能来自 PI-Desktop 的 X-Border 插件，或电脑上装的是旧版），按顺序执行（需要 Node.js 22 或更高，执行 `node --version` 检查；没有或太低时先告诉用户再安装）：
 
-1. 安装命令行：`npx -y https://x-border.app/agents/pkg/x-border-cli-1.5.74.tgz self-install`
+1. 安装命令行：`npx -y https://x-border.app/agents/pkg/x-border-cli-1.5.75.tgz self-install`
 2. 登录（之前登录过的会直接显示已登录，不用用户操作）：`~/.x-border/bin/x-border login`，把输出的授权链接原样发给用户，请用户在浏览器里登录 X-Border 网页、选择组织并点「允许」；然后执行 `~/.x-border/bin/x-border login --wait`，输出还是 `waiting_for_user` 就再执行一次，直到 `status=installed`。
 
 **只用上面装到 `~/.x-border/bin` 的命令行**：不要去电脑上找别的 X-Border 程序或代码（X-Border 桌面端、源码目录、npm 上的同名包）来运行，也不要手写 key 或自己拼地址。上面的命令失败时，把输出告诉用户，不要换别的办法。
@@ -67,7 +67,9 @@ X-Border 工具也可能直接是 MCP 工具，客户端会给工具名加前缀
 
 ## 工具
 
-常用工具：账户与大盘（`getCreditBalance`、`queryDashboardOverview`）、店铺（`queryShops`、`getShop`）、商品与清洗（`queryClaimedProducts`、`getClaimedProduct`、`triggerCleansing`）、上品（`publishToShop`、`queryPublishRecords`）、订单（`queryNoonOrders`）、图片与媒体（`createMediaUpload`、`registerGeneratedMedia`、`applyMediaToCleanedProduct`）。完整列表用 `x-border tools` 查。
+常用工具：账户与大盘（`getCreditBalance`、`queryDashboardOverview`）、店铺（`queryShops`、`getShop`）、商品与清洗（`queryClaimedProducts`、`getClaimedProduct`、`triggerCleansing`）、上品（`publishToShop`、`queryPublishRecords`）、订单（`queryNoonOrders`）、图片与媒体（`createMediaUpload`、`registerGeneratedMedia`、`listGeneratedMedia`、`getProductMediaTargets`、`applyMediaToProduct`）。完整列表用 `x-border tools` 查。
+
+把资源库里的图片或视频用到商品上（换主图、加轮播、换主图视频）：先调 `getProductMediaTargets` 看能用到哪（发布内容，或某个店铺已上线的商品）和支持的方式，告诉用户；用户确认后调 `applyMediaToProduct`，传资源 id（`listGeneratedMedia` 返回的 `id`）。支持 Temu 和 Shein。商品还没发布就选 `beforePublish`，已经上线就选 `online` 和对应店铺。**Shein 线上替换提交后要平台审核，审核通过前线上不变**，不要跟用户说已经改好了。
 
 用户要外部市场数据（亚马逊、沃尔玛、Shopee、TikTok Shop、Temu、1688 的销量、排名、竞品价格、类目、关键词、货源）时，用 `xb-data-analysis` 技能，不要编造。
 
