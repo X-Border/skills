@@ -21,7 +21,7 @@ metadata:
 
 ## 流程
 
-0. 先执行 `~/.x-border/bin/x-border --version`：执行出错或版本低于 1.5.83 时，按 `x-border` 技能「还没接好 X-Border 时」重新安装。
+0. 先执行 `~/.x-border/bin/x-border --version`：执行出错或版本低于 1.5.84 时，按 `x-border` 技能「还没接好 X-Border 时」重新安装。
 1. 先 `cd` 到视频所在的文件夹（分享链接、X-Border 上的文件链接就用用户当前的项目文件夹）再执行，项目和成片会建在那里的 `xb-videos/` 下。
 2. **识别原台词**：`~/.x-border/bin/x-border translate script --video <视频路径或链接> [--language <原视频说的语言，默认 zh>]`（1 XB Credit，不用另外确认费用）。输出每句的编号、时间、原文和「最多约 N 字 / M 词」的长度预算，并截几张关键帧；记下返回的项目目录。
 3. **核对**：看关键帧，以画面上的字（包装、烧录字幕）为准改正原台词里识别错的品牌名、商品名、数字和价格。
