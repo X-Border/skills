@@ -10,7 +10,7 @@ metadata:
 
 这些功能和 X-Border 创作工作室是同一套：同样的功能、模板、价格，结果自动进组织资源库。**有哪些功能、每个功能要什么输入、价格、平台规则，一律以 `listMediaFeatures` 实时返回的为准**，不要凭记忆或这份说明判断有没有某个功能、能不能做某种组合。
 
-工具调用方式（MCP 工具或 `x-border call`）、写操作确认、费用规则按 `x-border` 技能。下面的 `x-border media …` 命令要能执行命令，版本不低于 1.5.84（`~/.x-border/bin/x-border --version`；低于就按 `x-border` 技能「还没接好 X-Border 时」重装）。
+工具调用方式（MCP 工具或 `x-border call`）、写操作确认、费用规则按 `x-border` 技能。下面的 `x-border media …` 命令要能执行命令，版本不低于 1.5.85（`~/.x-border/bin/x-border --version`；低于就按 `x-border` 技能「还没接好 X-Border 时」重装）。
 
 ## 1. 选功能
 
