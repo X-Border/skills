@@ -10,7 +10,7 @@ metadata:
 
 这些功能和 X-Border 创作工作室是同一套：同样的功能、模板、价格，结果自动进组织资源库。**有哪些功能、每个功能要什么输入、价格、平台规则，一律以 `listMediaFeatures` 实时返回的为准**，不要凭记忆或这份说明判断有没有某个功能、能不能做某种组合。
 
-工具调用方式（MCP 工具或 `x-border call`）、写操作确认、费用规则按 `x-border` 技能。下面的 `x-border media …` 命令要能执行命令，版本不低于 1.5.87（`~/.x-border/bin/x-border --version`；低于就按 `x-border` 技能「还没接好 X-Border 时」重装）。
+工具调用方式（MCP 工具或 `x-border call`）、写操作确认、费用规则按 `x-border` 技能。下面的 `x-border media …` 命令要能执行命令，版本不低于 1.5.88（`~/.x-border/bin/x-border --version`；低于就按 `x-border` 技能「还没接好 X-Border 时」重装）。
 
 ## 1. 选功能
 
@@ -30,7 +30,7 @@ metadata:
 - **用户本地的图片或视频**：`~/.x-border/bin/x-border media upload <文件> [<文件>…]`，输出的链接作为 `productImages` / `referenceImages` / `sourceVideo`。聊天附件链接可以直接用。不能执行命令时，请用户把图片直接发在对话里（聊天附件链接可以直接用），或在 X-Border 桌面端的「图片创作」「视频创作」里做。
 - **参考图**按 `inputs.referenceImages` 的说明放（爆款图、场景图、面料图、原商品图、模特照……）。
 - **真人照片**（换模特、服装上身这类要放人物照片的功能）：必须是用户自己提供的照片，并先确认用户已经得到照片里这个人的同意；不要从网上找人脸。
-- 要挂到平台商品上的视频，比例按平台要求选（例如 Temu 主图视频只能 1:1、3:4 或 16:9）；平台选了以后按 `defaults.byPlatform` 处理文案语言和是否禁字。
+- 要挂到平台商品上的视频，比例按平台要求选（例如 Temu 主图视频只能 1:1、3:4 或 16:9）；平台选了以后按 `defaults.byPlatform` 处理文案语言和是否禁字。生成类图片功能的比例用户没指定时不填（或填 `auto`）：WB、Ozon、Yandex 出 3:4，其余平台按模板的比例，没有模板时跟着第 1 张图的比例。
 
 ## 3. 涂抹类功能的区域（遮罩）
 
